@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛡️ Next.js Micro-API Authentication (JWT)
 
-## Getting Started
+Este projeto demonstra a implementação de um sistema de autenticação moderno e seguro utilizando **JSON Web Tokens (JWT)** dentro do ecossistema Next.js (App Router). 
 
-First, run the development server:
+O foco principal foi construir uma arquitetura **Stateless** e **Secure-by-Design**, simulando o backend de uma aplicação de alta escala, como o meu projeto de TCC (ARCA).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tecnologias Utilizadas
+* **Next.js 15+**: Framework principal.
+* **TypeScript**: Tipagem estática para evitar falhas de lógica.
+* **Jose**: Biblioteca de alto desempenho para assinatura e verificação de JWT.
+* **Termux/Acode**: Ambiente de desenvolvimento mobile (Android).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛡️ Funcionalidades de Segurança
+* **Endpoint de Login (`/api/login`)**: Validação de credenciais e emissão de tokens assinados com algoritmo HS256.
+* **Middleware de Proteção**: Interceptador global que valida o token no cabeçalho `Authorization: Bearer` antes de liberar o acesso às rotas protegidas.
+* **Gestão de Sessão Stateless**: O servidor não armazena sessões, garantindo maior escalabilidade e segurança.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Como Testar (Via Terminal)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Gere o Token:**
+  ```bash
+   TOKEN=$(curl -s -X POST http://localhost:3000/api/login \
+        -H "Content-Type: application/json" \
+        -d '{"username": "rodrigo", "password": "123456"}' | jq -r .token)
 
-## Learn More
+2.**Acesse a Rota Protegida:**
+  ```bash
+   curl -H "Authorization: Bearer $TOKEN" http://localhost:3000/api/protegida
+   
+## 📈 Evolução do Projeto
 
-To learn more about Next.js, take a look at the following resources:
+​Este módulo de autenticação será integrado ao Projeto ARCA, onde as credenciais serão validadas via Supabase/PostgreSQL e as senhas serão criptografadas com BCrypt.
+​Desenvolvido por Rodrigo Pereira 🇧🇷
+Estudante de Desenvolvimento de Sistemas na ETEC Pedro Ferreira Alves
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚠️ Aviso Legal
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Este projeto foi desenvolvido para fins **estritamente educacionais** e de auditoria em redes próprias. O autor não se responsabiliza pelo uso indevido destas ferramentas ou conceitos em ambientes de terceiros sem a devida autorização expressa. Pratique o **Ethical Hacking**.
 
-## Deploy on Vercel
+## 📄 Licença
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
