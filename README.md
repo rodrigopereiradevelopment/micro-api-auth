@@ -22,11 +22,13 @@ O foco principal foi construir uma arquitetura **Stateless** e **Secure-by-Desig
    TOKEN=$(curl -s -X POST http://localhost:3000/api/login \
         -H "Content-Type: application/json" \
         -d '{"username": "rodrigo", "password": "123456"}' | jq -r .token)
+```
 
 2.**Acesse a Rota Protegida:**
   ```bash
    curl -H "Authorization: Bearer $TOKEN" http://localhost:3000/api/protegida
-   
+   ```
+
 ## 📈 Evolução do Projeto
 
 ​Este módulo de autenticação será integrado ao Projeto ARCA, onde as credenciais serão validadas via Supabase/PostgreSQL e as senhas serão criptografadas com BCrypt.
